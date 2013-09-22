@@ -4915,7 +4915,8 @@ public class SemanticAnalyzer extends BaseSemanticAnalyzer {
 
     // RESQUE prepration
     // String command =  "'/Users/hixiaoxi/Documents/GitHub/hivesp/resque/dummy 2 2 '";//"/usr/bin/tee /tmp/output.txt - ";
-    String command =  "'/Users/hixiaoxi/Documents/GitHub/hivesp/resque/xiling/task4/resque '" + spatialJoinType + "' 10 10'";
+    String command = "'" + conf.getVar(HiveConf.ConfVars.HIVESPATIALPATH) + " '" +spatialJoinType + "' 10 10'";
+
     TableDesc outInfo = null;
     TableDesc [] inInfo = new TableDesc [right.length];
     TableDesc errInfo;
@@ -7710,7 +7711,7 @@ public class SemanticAnalyzer extends BaseSemanticAnalyzer {
 
     while (!q.isEmpty()){
       child = q.poll();
-       
+
       if (child.getToken().getType()==TOK_TYPE) {
         res.add(child);
       }
@@ -7788,8 +7789,8 @@ public class SemanticAnalyzer extends BaseSemanticAnalyzer {
       LOG.info("7752 null == where ");
       insert = findToken(root, HiveParser.TOK_INSERT);
       where = new ASTNode(new CommonToken(HiveParser.TOK_WHERE, "TOK_WHERE"));
-      
-      
+
+
       LOG.info("join child count: " + join.getChildCount());
       deleteNode = (ASTNode)join.getChild(join.getChildCount()-1);
       LOG.info("deleteNode type: " + deleteNode.getType() + " ; text: " + deleteNode.getText());
@@ -7819,8 +7820,8 @@ public class SemanticAnalyzer extends BaseSemanticAnalyzer {
 
     // printParseTree(root);
 
-    // (=(TOK_FUNCTION(Intersects)(.(TOK_TABLE_OR_COL(ta))(outline))(.(TOK_TABLE_OR_COL(tb))(outline)))(TRUE)))) 
-        
+    // (=(TOK_FUNCTION(Intersects)(.(TOK_TABLE_OR_COL(ta))(outline))(.(TOK_TABLE_OR_COL(tb))(outline)))(TRUE))))
+
     //    => (=(.(TOK_TABLE_OR_COL(ta))(tile_id))(.(TOK_TABLE_OR_COL(tb))(tile_id)))))
 
     // change join
