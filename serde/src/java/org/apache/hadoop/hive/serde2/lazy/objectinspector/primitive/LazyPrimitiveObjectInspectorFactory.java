@@ -55,6 +55,8 @@ public final class LazyPrimitiveObjectInspectorFactory {
       new LazyVoidObjectInspector();
   public static final LazyTimestampObjectInspector LAZY_TIMESTAMP_OBJECT_INSPECTOR =
       new LazyTimestampObjectInspector();
+  public static final LazyGeometryObjectInspector LAZY_GEOMETRY_OBJECT_INSPECTOR =
+      new LazyGeometryObjectInspector();
   public static final LazyBinaryObjectInspector LAZY_BINARY_OBJECT_INSPECTOR =
       new LazyBinaryObjectInspector();
 
@@ -101,6 +103,8 @@ public final class LazyPrimitiveObjectInspectorFactory {
       return LAZY_VOID_OBJECT_INSPECTOR;
     case TIMESTAMP:
       return LAZY_TIMESTAMP_OBJECT_INSPECTOR;
+    case GEOMETRY:
+      return LAZY_GEOMETRY_OBJECT_INSPECTOR;
     default:
       throw new RuntimeException("Internal error: Cannot find ObjectInspector "
           + " for " + primitiveCategory);

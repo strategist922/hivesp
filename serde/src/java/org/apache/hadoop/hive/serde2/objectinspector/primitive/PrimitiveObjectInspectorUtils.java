@@ -131,15 +131,19 @@ public final class PrimitiveObjectInspectorUtils {
 
   static void registerType(PrimitiveTypeEntry t) {
     if (t.primitiveCategory != PrimitiveCategory.UNKNOWN) {
+      LOG.info("135 in PrimitiveObjectInspectorUtils.java | t.primitiveCategory = " + t.primitiveCategory);
       primitiveCategoryToTypeEntry.put(t.primitiveCategory, t);
     }
     if (t.primitiveJavaType != null) {
+      LOG.info("138 in PrimitiveObjectInspectorUtils.java | t.primitiveJavaType = " + t.primitiveJavaType);
       primitiveJavaTypeToTypeEntry.put(t.primitiveJavaType, t);
     }
     if (t.primitiveJavaClass != null) {
+      LOG.info("145 in PrimitiveObjectInspectorUtils.java | t.primitiveJavaClass = " + t.primitiveJavaClass);
       primitiveJavaClassToTypeEntry.put(t.primitiveJavaClass, t);
     }
     if (t.primitiveWritableClass != null) {
+      LOG.info("145 in PrimitiveObjectInspectorUtils.java | t.primitiveWritableClass = " + t.primitiveWritableClass);
       primitiveWritableClassToTypeEntry.put(t.primitiveWritableClass, t);
     }
     if (t.typeName != null) {

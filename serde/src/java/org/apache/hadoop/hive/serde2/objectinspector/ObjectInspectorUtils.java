@@ -31,6 +31,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.hive.serde.Constants;
 import org.apache.hadoop.hive.serde2.io.TimestampWritable;
+import org.apache.hadoop.hive.serde2.io.GeometryWritable;
 import org.apache.hadoop.hive.serde2.objectinspector.ConstantObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector.Category;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorFactory.ObjectInspectorOptions;
@@ -46,6 +47,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectIn
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.ShortObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.StringObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.TimestampObjectInspector;
+import org.apache.hadoop.hive.serde2.objectinspector.primitive.GeometryObjectInspector;
 import org.apache.hadoop.hive.serde2.typeinfo.TypeInfoUtils;
 import org.apache.hadoop.hive.shims.ShimLoader;
 import org.apache.hadoop.io.BytesWritable;
@@ -471,6 +473,13 @@ public final class ObjectInspectorUtils {
         TimestampWritable t = ((TimestampObjectInspector) poi)
             .getPrimitiveWritableObject(o);
         return t.hashCode();
+      case GEOMETRY:
+        Text t_xiling = ((GeometryObjectInspector) poi).getPrimitiveWritableObject(o);
+        int r_xiling = 0;
+        for (int i_xiling = 0; i_xiling < t_xiling.getLength(); i_xiling++) {
+          r_xiling = r_xiling * 31 + t_xiling.getBytes()[i_xiling];
+        }
+        return r_xiling;
       default: {
         throw new RuntimeException("Unknown type: "
             + poi.getPrimitiveCategory());
@@ -652,6 +661,13 @@ public final class ObjectInspectorUtils {
         TimestampWritable t1 = ((TimestampObjectInspector) poi1)
             .getPrimitiveWritableObject(o1);
         TimestampWritable t2 = ((TimestampObjectInspector) poi2)
+            .getPrimitiveWritableObject(o2);
+        return t1.compareTo(t2);
+      }
+      case GEOMETRY: {
+        Text t1 = ((GeometryObjectInspector) poi1)
+            .getPrimitiveWritableObject(o1);
+        Text t2 = ((GeometryObjectInspector) poi2)
             .getPrimitiveWritableObject(o2);
         return t1.compareTo(t2);
       }

@@ -29,6 +29,8 @@ import java.io.IOException;
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 
+import org.apache.hadoop.io.Text;
+
 /**
  * Writable for Geometry values.
  */
@@ -49,6 +51,10 @@ public class GeometryWritable implements WritableComparable {
   }
 
   public String get() {
+    return value;
+  }
+
+  public String getGeometry() {
     return value;
   }
 

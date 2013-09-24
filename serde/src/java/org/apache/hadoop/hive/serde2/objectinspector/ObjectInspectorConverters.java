@@ -33,6 +33,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.primitive.SettableIntObject
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.SettableLongObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.SettableShortObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.SettableTimestampObjectInspector;
+import org.apache.hadoop.hive.serde2.objectinspector.primitive.SettableGeometryObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.WritableStringObjectInspector;
 
 /**
@@ -113,6 +114,10 @@ public final class ObjectInspectorConverters {
         return new PrimitiveObjectInspectorConverter.TimestampConverter(
             (PrimitiveObjectInspector) inputOI,
             (SettableTimestampObjectInspector) outputOI);
+      case GEOMETRY:
+        return new PrimitiveObjectInspectorConverter.GeometryConverter(
+            (PrimitiveObjectInspector) inputOI,
+            (SettableGeometryObjectInspector) outputOI);
       case BINARY:
         return new PrimitiveObjectInspectorConverter.BinaryConverter(
             (PrimitiveObjectInspector)inputOI,

@@ -24,6 +24,7 @@ import org.apache.hadoop.hive.serde2.io.ByteWritable;
 import org.apache.hadoop.hive.serde2.io.DoubleWritable;
 import org.apache.hadoop.hive.serde2.io.ShortWritable;
 import org.apache.hadoop.hive.serde2.io.TimestampWritable;
+import org.apache.hadoop.hive.serde2.io.GeometryWritable;
 import org.apache.hadoop.hive.serde2.objectinspector.ConstantObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.PrimitiveObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.PrimitiveObjectInspector.PrimitiveCategory;
@@ -67,6 +68,8 @@ public final class PrimitiveObjectInspectorFactory {
       new JavaVoidObjectInspector();
   public static final JavaTimestampObjectInspector javaTimestampObjectInspector =
       new JavaTimestampObjectInspector();
+  public static final JavaGeometryObjectInspector javaGeometryObjectInspector =
+      new JavaGeometryObjectInspector();
   public static final JavaBinaryObjectInspector javaByteArrayObjectInspector =
       new JavaBinaryObjectInspector();
 
@@ -90,6 +93,8 @@ public final class PrimitiveObjectInspectorFactory {
       new WritableVoidObjectInspector();
   public static final WritableTimestampObjectInspector writableTimestampObjectInspector =
       new WritableTimestampObjectInspector();
+  public static final WritableGeometryObjectInspector writableGeometryObjectInspector =
+      new WritableGeometryObjectInspector();
   public static final WritableBinaryObjectInspector writableBinaryObjectInspector =
       new WritableBinaryObjectInspector();
 
@@ -116,6 +121,8 @@ public final class PrimitiveObjectInspectorFactory {
         writableVoidObjectInspector);
     cachedPrimitiveWritableInspectorCache.put(PrimitiveCategory.TIMESTAMP,
         writableTimestampObjectInspector);
+    cachedPrimitiveWritableInspectorCache.put(PrimitiveCategory.GEOMETRY,
+        writableGeometryObjectInspector);
     cachedPrimitiveWritableInspectorCache.put(PrimitiveCategory.BINARY,
         writableBinaryObjectInspector);
   }
@@ -143,6 +150,8 @@ public final class PrimitiveObjectInspectorFactory {
         javaVoidObjectInspector);
     cachedPrimitiveJavaInspectorCache.put(PrimitiveCategory.TIMESTAMP,
         javaTimestampObjectInspector);
+    cachedPrimitiveJavaInspectorCache.put(PrimitiveCategory.GEOMETRY,
+        javaGeometryObjectInspector);
     cachedPrimitiveJavaInspectorCache.put(PrimitiveCategory.BINARY,
         javaByteArrayObjectInspector);
   }
@@ -191,6 +200,8 @@ public final class PrimitiveObjectInspectorFactory {
       return new WritableConstantStringObjectInspector((Text)value);
     case TIMESTAMP:
       return new WritableConstantTimestampObjectInspector((TimestampWritable)value);
+    case GEOMETRY:
+      return new WritableConstantGeometryObjectInspector((Text)value);
     case BINARY:
       return new WritableConstantBinaryObjectInspector((BytesWritable)value);
     case VOID:

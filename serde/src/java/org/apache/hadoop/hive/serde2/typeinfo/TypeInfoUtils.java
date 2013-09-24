@@ -299,9 +299,9 @@ public final class TypeInfoUtils {
       LOG.info("299 in TypeInfoUtils.java | token t = " + t);
       LOG.info("300 in TypeInfoUtils.java | token t.text = " + t.text);
       LOG.info("301 in TypeInfoUtils.java | item = " + item);
-      if (null == PrimitiveObjectInspectorUtils.getTypeEntryFromTypeName(t.text)) {
-        LOG.info("303 in TypeInfoUtils.java | getTypeEntryFromTypeName(t.text) == null !!!");
-      }
+      //if (null == PrimitiveObjectInspectorUtils.getTypeEntryFromTypeName(t.text)) {
+      //  LOG.info("303 in TypeInfoUtils.java | getTypeEntryFromTypeName(t.text) == null !!!");
+      //}
 
       if (item.equals("type")) {
         if (!Constants.LIST_TYPE_NAME.equals(t.text)

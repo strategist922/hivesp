@@ -257,6 +257,20 @@ public class PrimitiveObjectInspectorConverter {
     }
   }
 
+  public static class GeometryConverter implements Converter {
+    PrimitiveObjectInspector inputOI;
+
+    public GeometryConverter(PrimitiveObjectInspector inputOI) {
+      // The output ObjectInspector is writableStringObjectInspector.
+      this.inputOI = inputOI;
+    }
+
+    @Override
+    public Object convert(Object input) {
+      return PrimitiveObjectInspectorUtils.getString(input, inputOI);
+    }
+  }
+
   public static class BinaryConverter implements Converter{
 
     PrimitiveObjectInspector inputOI;
@@ -341,6 +355,10 @@ public class PrimitiveObjectInspectorConverter {
         return t;
       case TIMESTAMP:
         t.set(((TimestampObjectInspector) inputOI)
+            .getPrimitiveWritableObject(input).toString());
+        return t;
+      case GEOMETRY:
+        t.set(((GeometryObjectInspector) inputOI)
             .getPrimitiveWritableObject(input).toString());
         return t;
       case BINARY:
